@@ -1,0 +1,14 @@
+rules:
+  - id: log4shell
+    message: org.apache.logging.log4j
+    languages:
+      - java
+    severity: ERROR
+    patterns:
+    - pattern-either:
+      - pattern: |
+          (org.apache.log4j.Logger $L).$M(...)
+      - pattern: |
+          (org.apache.logging.log4j.Logger $L).$M(...)
+      - pattern: |
+          (org.slf4j.Logger $L).$M(...)

@@ -1,0 +1,19 @@
+rules:
+  - id: log4shell
+    message: org.apache.logging.log4j
+    r2c-internal-project-depends-on:
+      depends-on-either:
+      - namespace: maven
+        package: org.apache.logging.log4j:log4j-core
+        version: ">= 2.0-beta9, < 2.15.1"
+    languages:
+      - java
+    severity: ERROR
+    patterns:
+    - pattern-either:
+      - pattern: |
+          (org.apache.log4j.Logger $L).$M(...)
+      - pattern: |
+          (org.apache.logging.log4j.Logger $L).$M(...)
+      - pattern: |
+          (org.slf4j.Logger $L).$M(...)
